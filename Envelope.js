@@ -35,8 +35,6 @@ class Envelope{
    get max(){
       return this._max;
    }
-
-   //Returns string showing the percentage of money in the envelope rounded to 2 decimal places
    get percentage(){
       return percentageAsText(this._moneyInside / this._max);
    }

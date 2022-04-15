@@ -54,7 +54,6 @@ app.delete('/envelope/:id', (req, res, next) => {
       res.status(202).send(envelopes);
    else
       res.status(400).send(envelopes);
-   
 });
 
 //Create new envelope with query string
@@ -92,4 +91,4 @@ app.post('/envelope/', (req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+});
