@@ -65,6 +65,8 @@ class Envelope{
    }
 }
 
+//A lot of this shit just never got used lmao
+
 //Adds up all the money from Envelope[] and returns amount of money inside
 function totalMoney(envelopes){
    let amount = 0;

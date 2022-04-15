@@ -1,4 +1,4 @@
-const {Envelope, totalMoney, totalBudget, budgetPercentage, getEnvelopeById} = require('./Envelope.js');
+const {Envelope, getEnvelopeById} = require('./Envelope.js');
 const express = require('express');
 const app = express();
 const port = 3000
@@ -101,22 +101,6 @@ envelopeRouter.post('/transfer/:from/:to/:amount', (req, res, next) => {
    }
    console.log(envelopes);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
