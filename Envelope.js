@@ -12,14 +12,13 @@ function percentageAsText(value){
 let idCounter = 0;
 
 class Envelope{
-   constructor(categoryName, moneyAmount){
+   constructor(categoryName, initBalance){
       this._id = idCounter;
-      this._max = moneyAmount;
-      this._moneyInside = moneyAmount;
+      this._balance = initBalance;
       this._category = categoryName;
       idCounter++;
-      if(moneyAmount < 0){
-         console.log(`Invalid entry on moneyAmount for new envelope named: "${categoryName}" Setting max to 0`)
+      if(initBalance < 0){
+         console.log(`Invalid entry on initBalance for new envelope named: "${categoryName}" Setting max to 0`)
          this._max = 0;
       }
    }
@@ -30,13 +29,39 @@ class Envelope{
       return this._category;
    }
    get moneyInside(){
-      return this._moneyInside;
-   }
-   get max(){
-      return this._max;
+      return this._balance;
    }
    get percentage(){
-      return percentageAsText(this._moneyInside / this._max);
+      return percentageAsText(this._balance / this._max);
+   }
+   updateCategory(newName){
+      this._category = newName;
+   }
+   //Returns false if balance is insufficient
+   updateBalance(newBalance){
+      if(!this.hasSufficientFunds(newBalance)){
+         console.log('Unable to update balance');
+         return false;
+      }
+      this._balance = newBalance;
+      return true;
+   }
+   //For sending and recieving between Envelopes
+   //Adds to max and balance
+   recieveMoney(amount){
+      this._balance += amount;
+   }
+   //Returns true if successful
+   loseMoney(amount){
+      return this.updateBalance(this._balance - amount);
+   }
+
+   hasSufficientFunds(amount){
+      if(amount < 0){
+         console.log('Insufficient funds')
+         return false;
+      }
+      return true;
    }
 }
 
