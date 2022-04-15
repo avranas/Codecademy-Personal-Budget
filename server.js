@@ -16,8 +16,6 @@ let envelopes = [
 
 app.use('/envelope', envelopeRouter);
 
-//Make a function which adds up total money and shit -- probably in Envelope.js
-
 //Test
 app.get('/', (req, res, next) => {
   res.send('Hello World!')
@@ -30,7 +28,6 @@ envelopeRouter.get('/', (req, res, next) => {
 
 //Get an envelope with a matching name
 //Example: localhost:3000/envelope/id
-//fyi this is how you put data into req.params <----Remember
 envelopeRouter.get('/:id', (req, res, next) => {
    const gotEnvelope = getEnvelopeById(envelopes, req.params.id);
    if(gotEnvelope){
@@ -58,7 +55,6 @@ envelopeRouter.delete('/:id', (req, res, next) => {
 
 //Create new envelope with query string
 //envelope/?name=''&money=''
-//fyi using a query string is how you put data into req.query <----Remember
 envelopeRouter.post('/', (req, res, next) => {
    //check if both entries are completed. I feel like there has to be a better way to do this
    if(req.query.name && req.query.money){
@@ -92,14 +88,13 @@ envelopeRouter.post('/transfer/:from/:to/:amount', (req, res, next) => {
    const sendingEnvelope = getEnvelopeById(envelopes, req.params.from);
    const recievingEnvelope = getEnvelopeById(envelopes, req.params.to);
    //Returns false if unsuccessful
-   if(sendingEnvelope.loseMoney(amount)){
+   if(sendingEnvelope.deductMoney(amount)){
       recievingEnvelope.recieveMoney(amount);
       res.status(202).send(envelopes);
    }else{
       console.log('Sending envelope does not have sufficient funds');
       res.status(400).send();
    }
-   console.log(envelopes);
 });
 
 app.listen(port, () => {

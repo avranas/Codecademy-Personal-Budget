@@ -1,4 +1,4 @@
-//Takes a number from 0-1 and returns a percentage in the XX.XX% notation
+//Takes a number from 0-1 and returns a percentage in the XX.XX% notation. I never ended up using this
 function percentageAsText(value){
    if(this._max === 0)
       return '0.00%'
@@ -52,7 +52,7 @@ class Envelope{
       this._balance += amount;
    }
    //Returns true if successful
-   loseMoney(amount){
+   deductMoney(amount){
       return this.updateBalance(this._balance - amount);
    }
 
@@ -65,8 +65,14 @@ class Envelope{
    }
 }
 
-//A lot of this shit just never got used lmao
+//Put in (Envelope[], id), returns first id that matches 
+function getEnvelopeById(envelopes, num){
+   return envelopes.find(i => {
+      return i.id === Number(num);
+   });
+}
 
+//The rest of this shit just never got used lmao
 //Adds up all the money from Envelope[] and returns amount of money inside
 function totalMoney(envelopes){
    let amount = 0;
@@ -90,13 +96,6 @@ function budgetPercentage(envelopes) {
    let money = totalMoney(envelopes);
    let budget = totalBudget(envelopes);
    return percentageAsText(money / budget);
-}
-
-//Put in (Envelope[], id), returns first id that matches 
-function getEnvelopeById(envs, num){
-   return envs.find(i => {
-      return i.id === Number(num);
-   });
 }
 
 module.exports = {Envelope, totalMoney, totalBudget, budgetPercentage, getEnvelopeById};
