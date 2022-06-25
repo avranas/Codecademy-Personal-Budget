@@ -1,0 +1,494 @@
+openapi: 3.0.1
+info:
+  title: Personal Budget - Codecademy Project
+  version: 2.0.0
+  description: Uses envelopes to keep track of your personal budget
+paths:
+  /envelope/:
+    summary: Get all envelopes
+    description: This path is used to retrieve all envelope data
+    get:
+      summary: Get all envelopes
+      description: Retrieves all data from the envelopes table
+      operationId: getEnvelopes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    [
+                        {
+                            "id": 11,
+                            "name": "booze",
+                            "amount": 100
+                        },
+                        {
+                            "id": 12,
+                            "name": "Utilities",
+                            "amount": 400
+                        },
+                        {
+                            "id": 13,
+                            "name": "Rent",
+                            "amount": 1500
+                        },
+                        {
+                            "id": 19,
+                            "name": "Investering",
+                            "amount": 4
+                        },
+                        {
+                            "id": 4,
+                            "name": "Savings",
+                            "amount": 1500
+                        },
+                        {
+                            "id": 14,
+                            "name": "Rent",
+                            "amount": 500
+                        },
+                        {
+                            "id": 15,
+                            "name": "Food",
+                            "amount": 900
+                        },
+                        {
+                            "id": 20,
+                            "name": "boop",
+                            "amount": 1000
+                        },
+                        {
+                            "id": 16,
+                            "name": "Gym",
+                            "amount": 29
+                        },
+                        {
+                            "id": 17,
+                            "name": "Gym",
+                            "amount": 90
+                        },
+                        {
+                            "id": 0,
+                            "name": "Food",
+                            "amount": 200101010
+                        },
+                        {
+                            "id": 9,
+                            "name": "Gifts",
+                            "amount": 158
+                        },
+                        {
+                            "id": 18,
+                            "name": "Investering",
+                            "amount": 4032
+                        }
+                    ]
+        '400':
+          description: Error
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Couldn't get all envelopes
+      tags:
+        - Envelope
+    post:
+      summary: Create envelope
+      description: Creates a new envelope with a new name and amount of money
+      operationId: createEnvelope
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    {
+                        "id": 21,
+                        "name": "Food",
+                        "amount": 900
+                    }
+        '400':
+          description: Error
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Something went wrong
+      tags:
+        - Envelope
+  /envelope/:id:
+    summary: Get one envelope with ID
+    description: Gets the data for a single envelope using its ID
+    get:
+      summary: Get envelope with ID
+      description: Gets all of the data from a single envelope using its ID
+      operationId: getEnvelope
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    {
+                        "id": 4,
+                        "name": "Savings",
+                        "amount": 1500
+                    }
+        '404':
+          description: Error
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Envelope not found!
+      tags:
+        - Envelope
+    delete:
+      summary: Delete envelope
+      description: Deletes a single envelope using its ID
+      operationId: deleteEnvelope
+      responses:
+        '202':
+          description: Success
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Success:
+                  value: 'Envelope deleted with ID: 4'
+        '404':
+          description: Error
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Envelope not found!
+      tags:
+        - Envelope
+  /envelope/:id/:balance:
+    summary: Update envelope balance
+    description: Updates the current balance of an envelope
+    put:
+      summary: Updates envelope with new data
+      description: Updates an envelope with a new balance and a new name if desired
+      operationId: updateEnvelope
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    {
+                        "id": 9,
+                        "name": "Savings",
+                        "amount": 1000
+                    }
+        '404':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Envelope not found!
+      tags:
+        - Envelope
+  /transaction/:
+    summary: Get all transactions
+    description: Gets the data of all transactions in the database
+    get:
+      summary: Get all transactions
+      description: Retrieves all of the data from the transactions table
+      operationId: getTransactions
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    [
+                        {
+                            "id": 1,
+                            "date": "June 21, 2022",
+                            "amount": 50,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 7,
+                            "date": "2022/06/21",
+                            "amount": 5,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 8,
+                            "date": "2022/06/21",
+                            "amount": 5,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 9,
+                            "date": "2022/06/21",
+                            "amount": 5,
+                            "sender_id": 17,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 10,
+                            "date": "2022/06/22",
+                            "amount": 42,
+                            "sender_id": 18,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 11,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 17,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 12,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 13,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 14,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 15,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 16,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 17,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 18,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 19,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 20,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 21,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 22,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 16
+                        },
+                        {
+                            "id": 23,
+                            "date": "2022/06/22",
+                            "amount": 4,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 24,
+                            "date": "2022-06-22",
+                            "amount": 2,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 25,
+                            "date": "2022-06-25",
+                            "amount": 11,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 26,
+                            "date": "2022-06-25",
+                            "amount": 11,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        },
+                        {
+                            "id": 27,
+                            "date": "2022-06-25",
+                            "amount": 11,
+                            "sender_id": 16,
+                            "recipient_id": 17
+                        }
+                    ]
+        '400':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Something bad happened
+      tags:
+        - Transaction
+  /transaction/:id:
+    summary: Get one transaction with ID
+    description: Gets the data for a single transaction using its ID
+    get:
+      summary: Get transaction
+      description: Gets all of the data from a single transaction using its ID
+      operationId: getTransaction
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    {
+                        "id": 1,
+                        "date": "June 21, 2022",
+                        "amount": 50,
+                        "sender_id": 16,
+                        "recipient_id": 17
+                    }
+        '404':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Transaction not found!
+      tags:
+        - Transaction
+    put:
+      summary: Update transaction
+      description: >-
+        Updates a transaction with a new date or amount of money transferred
+        using the transaction's ID
+      operationId: updateTransaction
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: |-
+                    {
+                        "id": 1,
+                        "date": "2022-06-23",
+                        "amount": 50,
+                        "sender_id": 16,
+                        "recipient_id": 17
+                    }
+        '400':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: An error occured while updating the transaction
+      tags:
+        - Transaction
+    delete:
+      summary: Delete transaction
+      description: Deletes a transaction using its ID
+      operationId: deleteTransaction
+      responses:
+        '202':
+          description: Success
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Success:
+                  value: 'Transaction deleted with ID: 1'
+        '404':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Error:
+                  value: Transaction not found!
+      tags:
+        - Transaction
+  /transfer/:sending/:receiving/:amount:
+    summary: Performs a transfer
+    description: >-
+      Sends a specified amount of money from one wallet to another using their
+      IDs, then adds a record of the transfer to the database in the transfers
+      table
+    post:
+      summary: Transfer money between envelopes
+      description: >-
+        Sends money from one envelope to another using their IDs, if the sending
+        envelope has a sufficient balance. Also adds a record of the transaction
+        to the transactions table in the database
+      operationId: transferMoney
+      responses:
+        '202':
+          description: Success
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Success:
+                  value: Sent $10 from envelope with ID:16 to envelope with ID:17
+        '400':
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Insufficient Balance Error:
+                  value: Sending envelope does not have a sufficient balance
+                Same Envelope Error:
+                  value: You can not send money to the same envelope"
+                Invalid Envelope Error:
+                  value: Invalid envelope entry
+      tags:
+        - Transfer
+tags:
+  - name: Envelope

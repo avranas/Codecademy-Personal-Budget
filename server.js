@@ -3,26 +3,27 @@ const express = require('express');
 const app = express();
 const port = 3000
 const envelopeRouter = express.Router();
-const transferRouter = express.Router();
-const envelopes = require('./envelopes');
-const transactions = require('./transactions');
+const transactionRouter = express.Router();
+const envelope = require('./envelope.js');
+const transaction = require('./transaction.js');
+const transfer = require('./transfer.js');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(express.json());
 app.use('/envelope', envelopeRouter);
-app.use('/transaction', transferRouter);
+app.use('/transaction', transactionRouter);
 
-envelopeRouter.get('/', envelopes.getEnvelopes);
-envelopeRouter.get('/:id', envelopes.getEnvelope);
-envelopeRouter.delete('/:id', envelopes.deleteEnvelope);
-envelopeRouter.post('/', envelopes.createEnvelope);
-envelopeRouter.put('/:id/:balance', envelopes.updateBalance);
-envelopeRouter.post('/transfer/:sending/:receiving/:amount', envelopes.transferMoney);
-transferRouter.get('/', transactions.getTransfers);
-transferRouter.get('/:id', transactions.getTransfer);
-transferRouter.put('/:id', transactions.updateTransaction);
-transferRouter.delete('/:id', transactions.deleteTransaction);
+app.post('/transfer/:sending/:receiving/:amount', transfer.transferMoney);
+envelopeRouter.get('/', envelope.getEnvelopes);
+envelopeRouter.get('/:id', envelope.getEnvelope);
+envelopeRouter.delete('/:id', envelope.deleteEnvelope);
+envelopeRouter.post('/', envelope.createEnvelope);
+envelopeRouter.put('/:id/:balance', envelope.updateEnvelope);
+transactionRouter.get('/', transaction.getTransactions);
+transactionRouter.get('/:id', transaction.getTransaction);
+transactionRouter.put('/:id', transaction.updateTransaction);
+transactionRouter.delete('/:id', transaction.deleteTransaction);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
