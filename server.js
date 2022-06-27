@@ -1,4 +1,3 @@
-const {Envelope} = require('./Envelope.js');
 const express = require('express');
 const app = express();
 const port = 3000
@@ -26,5 +25,5 @@ transactionRouter.put('/:id', transaction.updateTransaction);
 transactionRouter.delete('/:id', transaction.deleteTransaction);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Starting Personal Budget. Listening on port ${port}`)
 });
